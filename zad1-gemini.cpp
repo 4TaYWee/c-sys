@@ -13,7 +13,6 @@ bool create_file(const std::string& filename) {
     }
 }
 
-#include <iostream>
 
 int main() {
     std::string filename = "new_fisle.txt";
