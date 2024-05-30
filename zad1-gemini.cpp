@@ -1,18 +1,27 @@
 #include <fstream>
+#include <iostream>
 
 bool create_file(const std::string& filename) {
-  std::ofstream outfile(filename);
-  return outfile.is_open();
+    std::ofstream outfile(filename);
+    if (outfile.is_open()) {
+        outfile.close();
+        return true;
+    }
+    else {
+        std::cerr << "Error creating file: " << filename << std::endl;
+        return false;
+    }
 }
 
 #include <iostream>
 
 int main() {
-  std::string filename = "new_file.txt";
-  if (create_file(filename)) {
-    std::cout << "File " << filename << " created successfully!" << std::endl;
-  } else {
-    std::cerr << "Error creating file: " << filename << std::endl;
-  }
-  return 0;
+    std::string filename = "new_fisle.txt";
+    if (create_file(filename)) {
+        std::cout << "File '" << filename << "' created successfully!" << std::endl;
+    }
+    else {
+        std::cerr << "Failed to create file." << std::endl;
+    }
+    return 0;
 }
