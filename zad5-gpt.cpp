@@ -11,7 +11,6 @@ int main() {
     // Check if the command was executed successfully
     if (returnCode == 0) {
         std::cout << "Command executed successfully.\n";
-        std::cout << "Time taken: " << duration.count() << " milliseconds\n";
     } else {
         std::cerr << "Command failed to execute.\n";
     }
