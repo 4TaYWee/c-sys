@@ -1,24 +1,19 @@
 #include <iostream>
-#include <experimental/filesystem>
+#include <filesystem>
+
+bool copy_file(const std::string& source, const std::string& destination) {
+  try {
+    std::filesystem::copy(source, destination);
+    return true;
+  } catch (const std::filesystem::filesystem_error& e) {
+    std::cerr << "Error copying file: " << e.what() << std::endl;
+    return false;
+  }
+}
 
 int main() {
-  // Replace with the actual path to your file
-  const std::filesystem::path path = "/home/kali/Desktop/New Folder/plik";
-
-  // Set the desired permissions (octal format)
-  mode_t permissions = 0644;  // Owner: rw-, Group: r--, Others: r--
-
-  try {
-    // Convert permission mask to std::filesystem::perms object
-    std::experimental::filesystem::perms desired_perms = static_cast<std::experimental::filesystem::perms>(permissions);
-
-    std::filesystem::permissions(path, desired_perms);
-    std::cout << "File permissions for '" << path << "' changed successfully to "
-              << std::oct << permissions << std::endl;
-  } catch (const std::filesystem::filesystem_error& e) {
-    std::cerr << "Error: " << e.what() << std::endl;
-    return EXIT_FAILURE;
+  if (copy_file("source.txt", "copy.txt")) {
+    std::cout << "File copied successfully!" << std::endl;
   }
-
-  return EXIT_SUCCESS;
+  return 0;
 }
